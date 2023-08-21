@@ -33,7 +33,6 @@ public class FibonacciController implements Initializable {
         try{
             number = Integer.parseInt(numInput.getText());
             if (selectedChoice == null){
-                resultsLabel.setText("Select an option from the drop down");
                 throw new NullPointerException("Choice not selected");
             } else if (selectedChoice.equals(BOOLEAN_CHECK)){
                 boolean booleanResult = FibonacciChecker.isFibonacciNumber(number);
@@ -46,13 +45,14 @@ public class FibonacciController implements Initializable {
             }
         } catch (NumberFormatException | NullPointerException e){
             System.out.println(e.getMessage());
+            resultsLabel.setText("Select an option from the drop down");
         }
         System.out.println(selectedChoice);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        choiceBox.setValue(BOOLEAN_CHECK);
+        choiceBox.setValue("Make a selection");
         choiceBox.getItems().addAll(choices);
         choiceBox.setOnAction(this::getChoice);
     }
@@ -60,5 +60,4 @@ public class FibonacciController implements Initializable {
     private void getChoice(ActionEvent event){
         selectedChoice = choiceBox.getValue();
     }
-
 }
