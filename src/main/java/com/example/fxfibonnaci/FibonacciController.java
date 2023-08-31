@@ -18,7 +18,7 @@ public class FibonacciController implements Initializable {
     @FXML
     private ChoiceBox<String> choiceBox;
     private final String BOOLEAN_CHECK = "Boolean Check", FIBO_INDEX = "Fibonacci Index";
-    private final String[] choices = {BOOLEAN_CHECK,FIBO_INDEX};
+    private final String[] choices = {BOOLEAN_CHECK, FIBO_INDEX};
     private String selectedChoice;
 
     @FXML
@@ -26,38 +26,39 @@ public class FibonacciController implements Initializable {
 
     @FXML
     protected void onCheckNumberClick() {
-        String trueMessage = "True: the number x is a fibonacci number";
-        String falseMessage = "False: the number x is not a fibonacci number";
-        String fiboNumberAtIndex = "The fibonacci number at position x is y";
+        String trueMessage = "True: The number x is a Fibonacci number";
+        String falseMessage = "False: The number x is not a Fibonacci number";
+        String fiboNumberAtIndex = "The Fibonacci number at position x is y";
+        String invalidNumber = "Please enter a positive non-zero integer";
         int number;
-        try{
+        try {
             number = Integer.parseInt(numInput.getText());
-            if (selectedChoice == null){
-                throw new NullPointerException("Choice not selected");
-            } else if (selectedChoice.equals(BOOLEAN_CHECK)){
+            if (selectedChoice.equals(BOOLEAN_CHECK)) {
                 boolean booleanResult = FibonacciChecker.isFibonacciNumber(number);
-                String message = booleanResult ? trueMessage:falseMessage;
-                resultsLabel.setText(message.replace("x",String.valueOf(number)));
+                boolean lessThanOne = number < 1;
+                String message = booleanResult ? lessThanOne ? falseMessage : trueMessage : falseMessage;
+                resultsLabel.setText(message.replace("x", String.valueOf(number)));
             } else {
                 long index = FibonacciChecker.findFibonacciNumber(number);
-                resultsLabel.setText(fiboNumberAtIndex.replace("x", String.valueOf(number)).replace("y",
+                if (number < 1) {
+                    resultsLabel.setText(invalidNumber);
+                } else resultsLabel.setText(fiboNumberAtIndex.replace("x", String.valueOf(number)).replace("y",
                         String.valueOf(index)));
             }
-        } catch (NumberFormatException | NullPointerException e){
-            System.out.println(e.getMessage());
-            resultsLabel.setText("Select an option from the drop down");
+        } catch (NumberFormatException | NullPointerException e) {
+            resultsLabel.setText(invalidNumber);
         }
-        System.out.println(selectedChoice);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        choiceBox.setValue("Make a selection");
         choiceBox.getItems().addAll(choices);
         choiceBox.setOnAction(this::getChoice);
+
+        choiceBox.setValue(BOOLEAN_CHECK);
     }
 
-    private void getChoice(ActionEvent event){
+    private void getChoice(ActionEvent event) {
         selectedChoice = choiceBox.getValue();
     }
 }

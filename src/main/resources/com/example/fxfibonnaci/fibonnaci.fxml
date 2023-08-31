@@ -23,19 +23,22 @@
       </HBox>
       <HBox alignment="CENTER" layoutX="-2.0" layoutY="94.0" prefHeight="100.0" prefWidth="600.0">
          <children>
-            <TextField fx:id="numInput" alignment="CENTER" prefHeight="56.0" prefWidth="165.0">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </TextField>
-            <ChoiceBox fx:id="choiceBox" prefHeight="56.0" prefWidth="137.0">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </ChoiceBox>
+            <AnchorPane prefHeight="100.0" prefWidth="597.0">
+               <children>
+                  <TextField fx:id="numInput" alignment="CENTER" layoutX="113.0" layoutY="22.0" prefHeight="56.0" prefWidth="165.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </TextField>
+                  <ChoiceBox fx:id="choiceBox" layoutX="290.0" layoutY="22.0" prefHeight="56.0" prefWidth="137.0" />
+               </children>
+            </AnchorPane>
          </children>
       </HBox>
-      <Label fx:id="resultsLabel" alignment="CENTER" layoutY="213.0" prefHeight="42.0" prefWidth="600.0" text="Results will display here">
+      <Label fx:id="resultsLabel" alignment="CENTER" layoutY="213.0" prefHeight="56.0" prefWidth="600.0" text="Boolean check confirms whether a number is a fibonacci number or not. Fibonacci index returns the fibonacci number at desired index. Results will display here" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="14.0" />
          </font></Label>
